@@ -1,5 +1,5 @@
 {
-  "name": "vendor/frontcloner",
+  "name": "svinte/frontcloner",
   "description": "Clone and optimize frontend sites.",
   "type": "library",
   "autoload": {
