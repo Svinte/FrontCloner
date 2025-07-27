@@ -30,8 +30,8 @@ return [
         'dir' => storage_path('app/vendor/frontcloner/'),
 
         /**
-         * Cache map filename.
+         * Cache time to live.
          */
-        'map' => 'map.json',
+        'ttl' => 86_400
     ]
 ]

@@ -3,6 +3,7 @@
 namespace Vendor\FrontCloner;
 
 use Illuminate\Support\ServiceProvider;
+use Vendor\FrontCloner\Helpers\UrlHelper;
 
 class FrontClonerServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,10 @@ class FrontClonerServiceProvider extends ServiceProvider
         // CloneService
         $this->app->singleton(CloneService::class, function($app) {
             return new CloneService();
+        });
+
+        $this->app->singleton(UrlHelper::class, function($app) {
+            return new UrlHelper();
         });
 
         // Config

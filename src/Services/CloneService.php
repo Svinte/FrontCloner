@@ -2,8 +2,10 @@
 
 namespace Vendor\FrontCloner;
 
-use Error;
+use Exception;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Vendor\FrontCloner\Helpers\UrlHelper;
 
 class CloneService
 {
@@ -31,7 +33,9 @@ class CloneService
      */
     public function exists(string $url): bool
     {
-        // Exists logic here
+        $shortName = UrlHelper::normalize($url);
+
+        return Cache::has($shortName);
     }
 
     /**
@@ -39,11 +43,24 @@ class CloneService
      *
      * @param string $url The URL to clone.
      * @param bool $check = false Check if host allowed.
-     * @return string Document contents.
+     * @return string|null Document contents.
      */
-    public function fetch(string $url, bool $check = false): string
+    public function fetch(string $url, bool $check = false): string|null
     {
-        // Looks for
+        $response = Http::get($url);
+        $allowed = $check ? UrlHelper::isAllowedHost($url, $this->overrides) : true;
+
+        if($allowed === false)
+        {
+            return null;
+        }
+
+        if($response->successful())
+        {
+            return $response->body();
+        }
+
+        throw new Exception("File fetch failed. Code {$response->status}");
     }
 
     /**
@@ -51,11 +68,16 @@ class CloneService
      *
      * @param string $url The URL of document to clone.
      * @param string $content The document contents.
+     * @param int $ttl Cache time to live.
      * @return void
      */
-    public function put(string $url, string $content): void
+    public function put(string $url, string $content, $ttl = null): void
     {
-        // Put logic here
+        $ttl = $ttl ?? $this->getConfig('cache.ttl');
+
+        $shortName = UrlHelper::normalize($url);
+
+        Cache::put($shortName, $content, $ttl);
     }
 
     /**
@@ -66,13 +88,20 @@ class CloneService
      */
     public function delete(string $url): void
     {
-        // Delete logic here
+        $shortName = UrlHelper::normalize($url);
+
+        Cache::delete($shortName);
     }
 
-    // $cloner = \Vendor\FrontCloner\CloneService:set('allow_all', true);
-    // $document = $cloner->fetch('https://url.com');
-    // $cloner->put('https://url.com', $document);
-    // $cloner->get();
+    /**
+     * Clear the whole cache.
+     * 
+     * @return void
+     */
+    public function clear(): void
+    {
+        Cache::clear();
+    }
 
     /**
      * Resolve configuration value with support for overrides and cache.
