@@ -4,7 +4,7 @@ namespace Svinte\FrontCloner;
 
 use FrontCloneCache;
 use Illuminate\Support\ServiceProvider;
-use Vendor\FrontCloner\Helpers\UrlHelper;
+use Svinte\FrontCloner\Helpers\UrlHelper;
 
 class FrontClonerServiceProvider extends ServiceProvider
 {

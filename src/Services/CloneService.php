@@ -5,7 +5,7 @@ namespace Svinte\FrontCloner\Services;
 use Exception;
 use FrontCloneCache;
 use Illuminate\Support\Facades\Http;
-use Vendor\FrontCloner\Helpers\UrlHelper;
+use Svinte\FrontCloner\Helpers\UrlHelper;
 
 class CloneService
 {

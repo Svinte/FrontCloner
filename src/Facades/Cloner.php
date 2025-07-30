@@ -8,6 +8,6 @@ class FrontCloner extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Vendor\FrontCloner\Services\CloneService::class;
+        return \Svinte\FrontCloner\Services\CloneService::class;
     }
 }
