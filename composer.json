@@ -1,23 +1,23 @@
 {
-  "name": "svinte/frontcloner",
-  "description": "Clone and optimize frontend sites.",
-  "type": "library",
-  "autoload": {
-    "psr-4": {
-      "Vendor\\FrontCloner\\": "src/"
+    "name": "svinte/frontcloner",
+    "description": "Clone and optimize frontend sites.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Svinte\\FrontCloner\\": "src/"
+        },
+        "files": [
+            "src/Helpers/UrlHelpers.php"
+        ]
     },
-    "files": [
-      "src/Helpers/UrlHelpers.php"
-    ]
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Vendor\\FrontCloner\\FrontClonerServiceProvider"
-      ],
-      "aliases": {
-        "FrontCloner": "Vendor\\FrontCloner\\Facades\\Cloner"
-      }
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Svinte\\FrontCloner\\src\\FrontClonerServiceProvider"
+            ],
+            "aliases": {
+                "FrontCloner": "Svinte\\FrontCloner\\src\\Facades\\Cloner"
+            }
+        }
     }
-  }
 }

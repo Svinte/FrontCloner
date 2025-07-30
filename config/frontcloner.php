@@ -20,18 +20,23 @@ return [
 
     'cache' => [
         /**
-         * Cached file id length.
-         */
-        'id_len' => 9,
-
-        /**
-         * Dir cache directory.
-         */
-        'dir' => storage_path('app/vendor/frontcloner/'),
-
-        /**
          * Cache time to live.
          */
-        'ttl' => 86_400
-    ]
-]
+        'ttl' => 86_400,
+
+        /**
+         * Cache prefix.
+         */
+        'cache_prefix' => 'frontcloner_',
+
+        /**
+         * Cache directory.
+         */
+        'cache_dir' => 'app/vendor/frontcloner/',
+
+        /**
+         * Use Laravel Cache-Facades instead of file-based cache.
+         */
+        'use_laravel_cache' => true,
+    ],
+];

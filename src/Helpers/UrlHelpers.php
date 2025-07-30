@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\FrontCloner\Helpers;
+namespace Svinte\FrontCloner\Helpers;
 
 class UrlHelper
 {

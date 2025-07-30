@@ -1,7 +1,8 @@
 <?php
 
-namespace Vendor\FrontCloner;
+namespace Svinte\FrontCloner;
 
+use FrontCloneCache;
 use Illuminate\Support\ServiceProvider;
 use Vendor\FrontCloner\Helpers\UrlHelper;
 
@@ -12,13 +13,19 @@ class FrontClonerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // CloneService
+        // Services
         $this->app->singleton(CloneService::class, function($app) {
             return new CloneService();
         });
 
+        // Helpers
         $this->app->singleton(UrlHelper::class, function($app) {
             return new UrlHelper();
+        });
+
+        // Cache
+        $this->app->singleton(FrontCloneCache::class, function($app) {
+            return new FrontCloneCache();
         });
 
         // Config

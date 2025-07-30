@@ -1,15 +1,24 @@
 <?php
 
-namespace Vendor\FrontCloner;
+namespace Svinte\FrontCloner\Services;
 
 use Exception;
+use FrontCloneCache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 use Vendor\FrontCloner\Helpers\UrlHelper;
 
 class CloneService
 {
     protected array $overrides = [];
+    protected FrontCloneCache $cache;
+
+    /**
+     * Service construct.
+     */
+    public function __construct(FrontCloneCache $cache)
+    {
+        $this->cache = $cache;
+    }
 
     /**
      * Set CloneService configuration override.
@@ -35,7 +44,7 @@ class CloneService
     {
         $shortName = UrlHelper::normalize($url);
 
-        return Cache::has($shortName);
+        return $this->cache->exists($shortName);
     }
 
     /**
@@ -77,7 +86,7 @@ class CloneService
 
         $shortName = UrlHelper::normalize($url);
 
-        Cache::put($shortName, $content, $ttl);
+        $this->cache->put($shortName, $content, $ttl);
     }
 
     /**
@@ -90,17 +99,17 @@ class CloneService
     {
         $shortName = UrlHelper::normalize($url);
 
-        Cache::delete($shortName);
+        $this->cache->delete($shortName);
     }
 
     /**
      * Clear the whole cache.
-     * 
+     *
      * @return void
      */
     public function clear(): void
     {
-        Cache::clear();
+        $this->cache->clear();
     }
 
     /**
@@ -120,9 +129,9 @@ class CloneService
 
         // Check cache
         $cacheKey = 'frontcloner.config.' . $key;
-        if(Cache::has($cacheKey))
+        if($this->cache->exists($cacheKey))
         {
-            return Cache::get($cacheKey);
+            return $this->cache->get($cacheKey);
         }
 
         // Fall back to default config
