@@ -13,10 +13,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Svinte\\FrontCloner\\src\\FrontClonerServiceProvider"
+                "Svinte\\FrontCloner\\FrontClonerServiceProvider"
             ],
             "aliases": {
-                "FrontCloner": "Svinte\\FrontCloner\\src\\Facades\\Cloner"
+                "FrontCloner": "Svinte\\FrontCloner\\Facades\\Cloner"
             }
         }
     }
