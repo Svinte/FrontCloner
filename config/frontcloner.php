@@ -32,7 +32,7 @@ return [
         /**
          * Cache directory.
          */
-        'cache_dir' => 'app/vendor/frontcloner/',
+        'cache_dir' => 'app/vendor/svinte/frontcloner/',
 
         /**
          * Use Laravel Cache-Facades instead of file-based cache.

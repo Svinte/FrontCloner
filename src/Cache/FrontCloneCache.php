@@ -19,7 +19,7 @@ class FrontCloneCache
         $this->prefix = $conf['cache_prefix'] ?? 'frontcloner_';
         $this->ttl = $conf['ttl'] ?? 86_400;
         $this->useLaravelCache = $conf['use_laravel_cache'] ?? true;
-        $this->cacheDir = storage_path($conf['cache_dir'] ?? 'app/vendor/frontcloner/');
+        $this->cacheDir = storage_path($conf['cache_dir'] ?? 'app/vendor/svinte/frontcloner/');
 
         if(is_dir($this->cacheDir) === false)
         {
